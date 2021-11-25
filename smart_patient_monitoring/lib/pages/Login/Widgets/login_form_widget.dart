@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smart_patient_monitoring/pages/Home/home.dart';
 import 'package:smart_patient_monitoring/setting/login_page_setting.dart';
 
 class LoginFormWidget extends StatefulWidget {
@@ -85,7 +86,12 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
         elevation: 20.0,
         clipBehavior: Clip.antiAlias,
         child: MaterialButton(
-          onPressed: () {},
+          onPressed: () {
+        /*
+          TODO: Implement Proper Login (Current hack to directly navigate to homePage)
+        */
+             Navigator.of(context).push(MaterialPageRoute(builder: (arg) => const HomePage()));
+          },
           minWidth: 200.0,
           height: 50.0,
           color: const Color(0xFF295BE0),
