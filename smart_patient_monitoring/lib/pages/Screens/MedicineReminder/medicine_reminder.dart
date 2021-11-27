@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/medicine_card.dart';
+import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/model/medicine_model.dart';
 
 class MedicineReminder extends StatefulWidget {
   const MedicineReminder({Key? key}) : super(key: key);
@@ -8,8 +9,26 @@ class MedicineReminder extends StatefulWidget {
   _MedicineReminderState createState() => _MedicineReminderState();
 }
 
+// TODO: Check if the ringTime is stale else app will crash
 class _MedicineReminderState extends State<MedicineReminder> {
-  List<MedicineCard> medList = [];
+  List<MedicineCard> medList = [
+    MedicineCard(
+      model: MedicineModel(
+        medName: "Anti Histamine",
+        medType: "Anti-Bacterial",
+        description: "Loreum Ipsum dfdfdfdf dfdfdfadfadsfadfdasfasdfdasfasdfa",
+        ringTime: const TimeOfDay(hour: 23, minute: 00),
+      ),
+    ),
+    MedicineCard(
+      model: MedicineModel(
+        medName: "Anti Histamine",
+        medType: "Anti-bacterial",
+        description: "Loreum Ipsum",
+        ringTime: const TimeOfDay(hour: 23, minute: 00),
+      ),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -65,7 +84,18 @@ class _MedicineReminderState extends State<MedicineReminder> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SingleChildScrollView(
+              child: Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: height / 2.7),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: medList,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

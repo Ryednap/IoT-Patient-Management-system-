@@ -37,6 +37,8 @@ dependencies:
   carousel_slider: ^4.0.0
   curved_navigation_bar: ^1.0.1
   google_fonts: ^2.1.0
+  flutter_slidable: ^0.6.0
+  flutter_provider: ^2.1.0
 
 dev_dependencies:
   flutter_test:

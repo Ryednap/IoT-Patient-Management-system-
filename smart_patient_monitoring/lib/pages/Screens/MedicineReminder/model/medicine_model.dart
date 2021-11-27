@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MedicineModel {
-  DateTime? ringTime;
+  TimeOfDay? ringTime;
   String? id;
   String? medName;
   String? medType;
