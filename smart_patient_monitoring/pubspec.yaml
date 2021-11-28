@@ -39,6 +39,10 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_slidable: ^0.6.0
   flutter_provider: ^2.1.0
+  flutter_switch: ^0.3.2
+  tuple: ^2.0.0
+  syncfusion_flutter_gauges: ^19.3.55
+  avatar_glow: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +92,13 @@ flutter:
         - asset: fonts/TrajanPro_Bold.ttf
           weight: 700
         - asset: fonts/TrajanPro_Regular.ttf
+    - family: Peralta
+      fonts:
+        - asset: fonts/Peralta.ttf
+    - family: Lobster
+      fonts:
+        - asset: fonts/Lobster_Regular.ttf
+
     - family: pill_reminder
       fonts:
         - asset: fonts/icons/pill_reminder.ttf
@@ -97,12 +108,13 @@ flutter:
     - family: smart_home
       fonts:
         - asset: fonts/icons/smart_home.ttf
-    - family: Peralta
+    - family: ac_on
       fonts:
-        - asset: fonts/Peralta.ttf
-    - family: Lobster
+        - asset: fonts/icons/Ac_on.ttf
+    - family: smart_home
       fonts:
-        - asset: fonts/Lobster_Regular.ttf
+        - asset: fonts/icons/Ac_off.ttf
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

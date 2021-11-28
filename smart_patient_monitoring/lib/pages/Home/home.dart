@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_patient_monitoring/pages/Screens/health_monitor.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/medicine_reminder.dart';
 import 'package:smart_patient_monitoring/pages/Screens/setting.dart';
-import 'package:smart_patient_monitoring/pages/Screens/smart_home.dart';
+import 'package:smart_patient_monitoring/pages/Screens/SmartHome/smart_home.dart';
 import 'package:smart_patient_monitoring/setting/custom_icons.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,8 +16,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _bottomNavBarItems = <Widget>[
     Icon(CustomIcons.pill_reminder, size: 30, color: Colors.black),
-    Icon(CustomIcons.health_monitor,
-        size: 40, color: Colors.redAccent.shade700),
+/*     Icon(CustomIcons.health_monitor,
+        size: 40, color: Colors.redAccent.shade700), */
     Icon(CustomIcons.smart_home, size: 30, color: Colors.brown.shade800),
     Icon(Icons.settings, size: 30, color: Colors.blueGrey.shade700),
   ];
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         },
         children: const [
           MedicineReminder(),
-          HealthMonitor(),
+          //         HealthMonitor(),
           SmartHome(),
           Setting(),
         ],

@@ -22,6 +22,8 @@ class CustomIcons {
     'pill_reminder',
     'health_monitor',
     'smart_home',
+    "ac_on",
+    "ac_off"
   ];
   static const String? _kFontPkg = null;
 
@@ -31,4 +33,8 @@ class CustomIcons {
       IconData(0xe800, fontFamily: _kFontFam[1], fontPackage: _kFontPkg);
   static IconData smart_home =
       IconData(0xe800, fontFamily: _kFontFam[2], fontPackage: _kFontPkg);
+  static IconData ac_on =
+      IconData(0xe800, fontFamily: _kFontFam[3], fontPackage: _kFontPkg);
+  static IconData ac_off =
+      IconData(0xe800, fontFamily: _kFontFam[4], fontPackage: _kFontPkg);
 }
