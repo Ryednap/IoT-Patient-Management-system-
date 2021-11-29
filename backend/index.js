@@ -1,8 +1,9 @@
-const express = require('express');
-const app = express();
+const http = require('http');
+const app = require('./api/routes/app');
 
-const authRoute = require('./routes/auth');
+const httpServer = http.createServer(app);
+const port = process.env.PORT || 3000;
 
-// Route middleware
-
-app.listen(3000, () => console.log("Server is running"));
+httpServer.listen(port, () => {
+    console.log(`Server is listening at port: ${port}`);
+});

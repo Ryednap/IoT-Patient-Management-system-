@@ -12,6 +12,8 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "mongoose": "^6.0.12",
-    "nodemon": "^2.0.15"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "urllib": "^2.38.0"
   }
 }

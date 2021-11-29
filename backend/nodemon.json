@@ -1,0 +1,6 @@
+{
+    "env" : {
+        "PORT" : 3000,
+        "MONGO_ATLAS_PW" : "Ryednap"
+    }
+}
