@@ -1,3 +1,6 @@
+// environment configuration
+require('dotenv').config();
+
 const http = require('http');
 const app = require('./api/routes/app');
 

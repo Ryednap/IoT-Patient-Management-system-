@@ -3,8 +3,11 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const app = express();
+mongoose.connect('mongodb+srv://Ryednap:' + process.env.MONGO_ATLAS_PW + '@iot-smartpatientmanagem.xesir.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
+const app = express();
+const medicineRouter = require('./medicine');
+const smartHomeRotuer = require('./smart_home');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,7 +23,8 @@ app.use((req, res, next) => {
     next();
 });
 
-
+app.use('/medicine', medicineRouter);
+app.use('/smart_home', smartHomeRotuer);
 
 
 app.use((req, res, next) => {
@@ -30,11 +34,12 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-    res.status(erorr.status || 5000).json({
+    res.status(error.status || 500).json({
         error: {
             message: error.message
         }
     });
 })
+
 
 module.exports = app;
