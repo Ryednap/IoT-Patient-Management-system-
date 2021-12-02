@@ -42,7 +42,7 @@ class _SmartHomeState extends State<SmartHome> {
       width: double.infinity,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bcg3_page2.jpg"),
+          image: AssetImage("assets/images/bcg4_page2.jpg"),
           fit: BoxFit.cover,
         ),
       ),

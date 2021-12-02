@@ -29,10 +29,18 @@ class _TemperatureMonitorState extends State<TemperatureMonitor> {
     List<Color> newRangeMarkerGradientColorList = [];
     newRangeMarkerGradientColorList.add(colorList.elementAt(0));
     newRangeMarkerGradientColorList.add(colorList.elementAt(1));
-    if (value > 10.0) newRangeMarkerGradientColorList.add(colorList.elementAt(2));
-    if (value >= 20.0) newRangeMarkerGradientColorList.add(colorList.elementAt(3));
-    if (value >= 30.0) newRangeMarkerGradientColorList.add(colorList.elementAt(4));
-    if (value >= 40.0) newRangeMarkerGradientColorList.add(colorList.elementAt(5));
+    if (value > 10.0) {
+      newRangeMarkerGradientColorList.add(colorList.elementAt(2));
+    }
+    if (value >= 20.0) {
+      newRangeMarkerGradientColorList.add(colorList.elementAt(3));
+    }
+    if (value >= 30.0) {
+      newRangeMarkerGradientColorList.add(colorList.elementAt(4));
+    }
+    if (value >= 40.0) {
+      newRangeMarkerGradientColorList.add(colorList.elementAt(5));
+    }
     if (value > 45.0) newRangeMarkerGradientColorList.add(colorList.last);
     rangeMarkerGradientColorList = List.from(newRangeMarkerGradientColorList);
   }
@@ -72,20 +80,23 @@ class _TemperatureMonitorState extends State<TemperatureMonitor> {
     }
   }
 
+  late Timer _timer;
   @override
   void initState() {
-    super.initState();
-    Timer.periodic(const Duration(milliseconds: 10000), (Timer t) async {
+    _changeGradientColor();
+    _timer =
+        Timer.periodic(const Duration(milliseconds: 2000), (Timer t) async {
       value = await createGetRequest("/smart_home/temperature");
-      _weatherImage();
-      _weatherShadowColor();
       _changeGradientColor();
       setState(() {});
     });
+
+    super.initState();
   }
 
   @override
   void dispose() {
+    _timer.cancel();
     super.dispose();
   }
 

@@ -44,6 +44,8 @@ dependencies:
   syncfusion_flutter_gauges: ^19.3.55
   avatar_glow: ^2.0.2
   http: ^0.13.4
+  json_serializable: ^6.1.0
+  json_annotation: ^4.4.0
 
 dev_dependencies:
   flutter_test:
