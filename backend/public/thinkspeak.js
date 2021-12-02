@@ -13,7 +13,7 @@ const urllibRequestAsync = Promise.promisify(urllib.request);
 let thingspeakPost = function (data, field) {
     const URL = process.env.THINGSPEAK_WRITE_URL;
     const KEY = process.env.THINGSPEAK_WRITE_KEY;
-    const HEADER = `&${field}='${data}'`;
+    const HEADER = `&field${field}='${data}'`;
 
     const NEW_URL = URL + KEY + HEADER;
     console.log("Sending POST request to " + NEW_URL);
@@ -39,9 +39,13 @@ let thingspeakPost = function (data, field) {
  * JSON document
  */
 
-let thingspeakGet = async function (field) {
-    const URL = process.env.THINGSPEAK_READ_URL;
-    const KEY = process.env.THINGSPEAK_READ_KEY;
+let thingspeakGet = async function (field, temp) {
+    let URL = process.env.THINGSPEAK_READ_URL;
+    let KEY = process.env.THINGSPEAK_READ_KEY;
+    if (temp != null) {
+        KEY = process.env.THINGSPEAK_TEMPERATURE_READ_KEY;
+        URL = process.env.THINGSPEAK_TEMPERATURE_READ_URL;
+    }
     const HEADER = "&results=1";
     const NEW_URL = URL + `${field}.json?api_key=` + KEY + HEADER;
     console.log("sending GET request to " + NEW_URL);

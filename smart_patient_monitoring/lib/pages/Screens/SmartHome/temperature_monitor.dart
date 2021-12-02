@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:smart_patient_monitoring/service/http_service.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class TemperatureMonitor extends StatefulWidget {
@@ -22,14 +25,16 @@ class _TemperatureMonitorState extends State<TemperatureMonitor> {
   List<Color> rangeMarkerGradientColorList = [];
   double value = 13;
 
-  void changeGradientColor() {
-    rangeMarkerGradientColorList.add(colorList.elementAt(0));
-    rangeMarkerGradientColorList.add(colorList.elementAt(1));
-    if (value > 10.0) rangeMarkerGradientColorList.add(colorList.elementAt(2));
-    if (value >= 20.0) rangeMarkerGradientColorList.add(colorList.elementAt(3));
-    if (value >= 30.0) rangeMarkerGradientColorList.add(colorList.elementAt(4));
-    if (value >= 40.0) rangeMarkerGradientColorList.add(colorList.elementAt(5));
-    if (value > 45.0) rangeMarkerGradientColorList.add(colorList.last);
+  void _changeGradientColor() {
+    List<Color> newRangeMarkerGradientColorList = [];
+    newRangeMarkerGradientColorList.add(colorList.elementAt(0));
+    newRangeMarkerGradientColorList.add(colorList.elementAt(1));
+    if (value > 10.0) newRangeMarkerGradientColorList.add(colorList.elementAt(2));
+    if (value >= 20.0) newRangeMarkerGradientColorList.add(colorList.elementAt(3));
+    if (value >= 30.0) newRangeMarkerGradientColorList.add(colorList.elementAt(4));
+    if (value >= 40.0) newRangeMarkerGradientColorList.add(colorList.elementAt(5));
+    if (value > 45.0) newRangeMarkerGradientColorList.add(colorList.last);
+    rangeMarkerGradientColorList = List.from(newRangeMarkerGradientColorList);
   }
 
   String _weatherImage() {
@@ -70,7 +75,18 @@ class _TemperatureMonitorState extends State<TemperatureMonitor> {
   @override
   void initState() {
     super.initState();
-    changeGradientColor();
+    Timer.periodic(const Duration(milliseconds: 10000), (Timer t) async {
+      value = await createGetRequest("/smart_home/temperature");
+      _weatherImage();
+      _weatherShadowColor();
+      _changeGradientColor();
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -118,11 +134,6 @@ class _TemperatureMonitorState extends State<TemperatureMonitor> {
                 enableAnimation: true,
                 cornerStyle: CornerStyle.bothCurve,
                 gradient: SweepGradient(colors: rangeMarkerGradientColorList),
-                onValueChanged: (double newValue) {
-                  value = newValue;
-                  changeGradientColor();
-                  setState(() {});
-                },
               ),
               MarkerPointer(
                 value: value,

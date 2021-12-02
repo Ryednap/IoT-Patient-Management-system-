@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:smart_patient_monitoring/pages/Screens/SmartHome/smart_light.dart';
 import 'package:smart_patient_monitoring/pages/Screens/SmartHome/smart_tv.dart';
 import 'package:smart_patient_monitoring/pages/Screens/SmartHome/temperature_monitor.dart';
+import 'package:smart_patient_monitoring/service/http_service.dart';
 import 'package:smart_patient_monitoring/setting/custom_icons.dart';
 import 'package:tuple/tuple.dart';
 
@@ -105,6 +108,8 @@ class _SmartHomeState extends State<SmartHome> {
                     onToggle: (val) {
                       setState(() {
                         status = val;
+                        createPostRequest(
+                            "/smart_home/smartAc", status ? "ON" : "OFF");
                       });
                     },
                   ),

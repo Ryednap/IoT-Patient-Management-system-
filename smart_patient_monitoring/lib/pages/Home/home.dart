@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_patient_monitoring/pages/Screens/health_monitor.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/medicine_reminder.dart';
 import 'package:smart_patient_monitoring/pages/Screens/setting.dart';
 import 'package:smart_patient_monitoring/pages/Screens/SmartHome/smart_home.dart';

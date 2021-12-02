@@ -43,6 +43,7 @@ dependencies:
   tuple: ^2.0.0
   syncfusion_flutter_gauges: ^19.3.55
   avatar_glow: ^2.0.2
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
