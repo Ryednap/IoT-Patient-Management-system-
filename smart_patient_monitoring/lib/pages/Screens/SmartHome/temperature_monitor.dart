@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:smart_patient_monitoring/service/http_service.dart';
+import 'package:smart_patient_monitoring/service/smartHome_api.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class TemperatureMonitor extends StatefulWidget {

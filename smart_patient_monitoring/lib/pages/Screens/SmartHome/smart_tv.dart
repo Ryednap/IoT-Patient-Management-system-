@@ -1,6 +1,6 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_patient_monitoring/service/http_service.dart';
+import 'package:smart_patient_monitoring/service/smartHome_api.dart';
 
 class SmartTV extends StatefulWidget {
   const SmartTV({Key? key}) : super(key: key);

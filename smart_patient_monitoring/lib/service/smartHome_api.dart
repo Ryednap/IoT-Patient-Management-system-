@@ -15,7 +15,7 @@ void createPostRequest(String endpoint, String state) async {
     final uri = Uri.parse(decodedResponse['uri'] as String);
     print(await client.get(uri));
   } catch (e) {
-    print(e.toString());
+    print(e.toString());  
   } finally {
     client.close();
   }

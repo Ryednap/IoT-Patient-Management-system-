@@ -83,10 +83,12 @@ class MedicineCard extends StatelessWidget {
   }
 
   Duration calculateDuration() {
-    TimeOfDay? time = model?.ringTime;
+    String? s = model?.ringTime;
+    TimeOfDay? time = TimeOfDay(
+        hour: int.parse(s!.split(":")[0]), minute: int.parse(s.split(":")[1]));
     TimeOfDay now = TimeOfDay.now();
     return Duration(
-        hours: time!.hour - now.hour, minutes: time.minute - now.minute);
+        hours: time.hour - now.hour, minutes: time.minute - now.minute);
   }
 
   @override

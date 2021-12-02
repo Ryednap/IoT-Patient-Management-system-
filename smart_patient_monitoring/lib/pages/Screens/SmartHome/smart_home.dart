@@ -6,7 +6,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:smart_patient_monitoring/pages/Screens/SmartHome/smart_light.dart';
 import 'package:smart_patient_monitoring/pages/Screens/SmartHome/smart_tv.dart';
 import 'package:smart_patient_monitoring/pages/Screens/SmartHome/temperature_monitor.dart';
-import 'package:smart_patient_monitoring/service/http_service.dart';
+import 'package:smart_patient_monitoring/service/smartHome_api.dart';
 import 'package:smart_patient_monitoring/setting/custom_icons.dart';
 import 'package:tuple/tuple.dart';
 
