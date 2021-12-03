@@ -62,6 +62,7 @@ router.post('/', (req, res) => {
         description: req.body.description,
         ringTime: req.body.ringTime
     };
+    console.log(`request for POST ${medicine}`);
     thingspeakPost(`0${medicine.ringTime}`, 1).then(status => {
         if (status != 200) {
             res.status(status).json({
@@ -99,7 +100,7 @@ router.patch('/:medicineId', (req, res) => {
             name: req.body.name,
             type: req.body.type,
             description: req.body.description,
-            ringTime: req.body.description
+            ringTime: req.body.ringTime
         }
     }).exec().then(result => {
         console.log(result);

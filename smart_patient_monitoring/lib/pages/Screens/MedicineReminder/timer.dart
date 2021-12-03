@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class Timer extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final duration;
   const Timer({Key? key, required this.duration}) : super(key: key);
 

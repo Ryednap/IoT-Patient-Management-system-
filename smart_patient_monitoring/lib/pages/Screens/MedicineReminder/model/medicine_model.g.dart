@@ -18,8 +18,8 @@ MedicineModel _$MedicineModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$MedicineModelToJson(MedicineModel instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'medName': instance.medName,
-      'medType': instance.medType,
+      'name': instance.medName,
+      'type': instance.medType,
       'description': instance.description,
       'ringTime': instance.ringTime,
     };

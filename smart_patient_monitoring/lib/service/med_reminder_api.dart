@@ -12,11 +12,12 @@ class MedicineReminderAPI {
     final client = http.Client();
     try {
       print("Creating POST request to /medicine endPoint");
+      print(model);
+      print(model!.toJson());
       final response =
-          await client.post(Uri.http(url, "/medicine/"), body: model?.toJson());
-      final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
-      final uri = Uri.parse(decodedResponse['uri'] as String);
-      print(await client.get(uri));
+          await client.post(Uri.http(url, "/medicine/"), body: model.toJson());
+      print(response.bodyBytes.runtimeType);
+      print(response.statusCode.runtimeType);
     } catch (e) {
       print(e);
     } finally {
@@ -26,6 +27,8 @@ class MedicineReminderAPI {
 
   static void updateMedicineModel(MedicineModel? model) async {
     final client = http.Client();
+    print("Updateing>....\n");
+    print(model);
     try {
       final medicineId = model!.id;
       final response = await client
@@ -69,6 +72,7 @@ class MedicineReminderAPI {
     } finally {
       client.close();
     }
+    print(models);
     final StreamController<List<MedicineModel>> controller =
         StreamController<List<MedicineModel>>();
     controller.add(models);

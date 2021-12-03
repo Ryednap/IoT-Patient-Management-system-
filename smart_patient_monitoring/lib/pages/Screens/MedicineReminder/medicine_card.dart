@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/medicine_edit_page.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/model/medicine_model.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/timer.dart';
 
@@ -88,7 +89,11 @@ class MedicineCard extends StatelessWidget {
         hour: int.parse(s!.split(":")[0]), minute: int.parse(s.split(":")[1]));
     TimeOfDay now = TimeOfDay.now();
     return Duration(
-        hours: time.hour - now.hour, minutes: time.minute - now.minute);
+      hours: (time.hour - now.hour < 0 ? now.hour : time.hour - now.hour),
+      minutes: (time.minute - now.minute < 0
+          ? now.minute
+          : time.minute - now.minute),
+    );
   }
 
   @override
@@ -102,7 +107,10 @@ class MedicineCard extends StatelessWidget {
             icon: Icons.edit,
             color: Colors.green.shade400,
             caption: 'edit',
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => MedicineEditPage(model: model)));
+            },
           ),
         ],
         secondaryActions: [
