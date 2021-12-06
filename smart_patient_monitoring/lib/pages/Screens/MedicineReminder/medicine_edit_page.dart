@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/model/medicine_model.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/model/medicine_provider.dart';
 
 class MedicineEditPage extends StatefulWidget {
   MedicineModel? model;
-  MedicineEditPage({Key? key, @required this.model}) : super(key: key);
+  final VoidCallback foo;
+  MedicineEditPage({
+    Key? key,
+    this.model,
+    required this.foo,
+  }) : super(key: key);
 
   @override
   _MedicineEditPageState createState() => _MedicineEditPageState();
@@ -161,6 +167,7 @@ class _MedicineEditPageState extends State<MedicineEditPage> {
           }
           Provider.of<MedicineProvider>(context, listen: false)
               .updateModel(model);
+          widget.foo();
           Navigator.of(context).pop();
           _formKey.currentState?.validate();
         },

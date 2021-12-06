@@ -8,6 +8,18 @@ import 'package:http/http.dart' as http;
 String url = "localhost:5000";
 
 class MedicineReminderAPI {
+  static void createRingPostRequest(String data) async {
+    final client = http.Client();
+    try {
+      print ("Creating POST Request to /medicine/ring/:data");
+      final response = await client.post(Uri.http(url, "/medicine/ring/${data}"));
+      print (response.statusCode);
+    } catch (e) {
+      print(e);
+    } finally {
+      client.close();
+    }
+  }
   static void createMedicineModel(MedicineModel? model) async {
     final client = http.Client();
     try {
@@ -16,8 +28,7 @@ class MedicineReminderAPI {
       print(model!.toJson());
       final response =
           await client.post(Uri.http(url, "/medicine/"), body: model.toJson());
-      print(response.bodyBytes.runtimeType);
-      print(response.statusCode.runtimeType);
+     print (response.statusCode);
     } catch (e) {
       print(e);
     } finally {

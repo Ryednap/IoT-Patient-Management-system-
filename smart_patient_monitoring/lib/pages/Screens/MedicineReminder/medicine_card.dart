@@ -1,12 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
+
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/medicine_edit_page.dart';
+import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/medicine_reminder.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/model/medicine_model.dart';
+import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/model/medicine_provider.dart';
 import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/timer.dart';
+import 'package:smart_patient_monitoring/service/med_reminder_api.dart';
+
 
 class MedicineCard extends StatelessWidget {
   final MedicineModel? model;
-  const MedicineCard({Key? key, this.model}) : super(key: key);
+  final VoidCallback foo;
+
+   MedicineCard({
+    Key? key,
+    this.model,
+    required this.foo,
+  }) : super(key: key);
+
+  String data = "Other";
 
   Widget medNameWidget() {
     return Text(
@@ -83,16 +99,22 @@ class MedicineCard extends StatelessWidget {
     );
   }
 
-  Duration calculateDuration() {
+
+  Duration calculateDuration(BuildContext context) {
     String? s = model?.ringTime;
     TimeOfDay? time = TimeOfDay(
         hour: int.parse(s!.split(":")[0]), minute: int.parse(s.split(":")[1]));
     TimeOfDay now = TimeOfDay.now();
+      
+      if (model!.medType == "Anti-Bacterial") {
+        data = "Bacterial";
+      } else if (model!.medType == "Anti-Viral") {
+        data = "Viral";
+      }
+
     return Duration(
-      hours: (time.hour - now.hour < 0 ? now.hour : time.hour - now.hour),
-      minutes: (time.minute - now.minute < 0
-          ? now.minute
-          : time.minute - now.minute),
+      hours: (time.hour - now.hour < 0 ? 0 : time.hour - now.hour),
+      minutes: (time.minute - now.minute < 0 ? 0 : time.minute - now.minute),
     );
   }
 
@@ -109,7 +131,8 @@ class MedicineCard extends StatelessWidget {
             caption: 'edit',
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => MedicineEditPage(model: model)));
+                  builder: (context) =>
+                      MedicineEditPage(model: model, foo: foo)));
             },
           ),
         ],
@@ -118,7 +141,12 @@ class MedicineCard extends StatelessWidget {
             icon: Icons.delete,
             color: Colors.redAccent,
             caption: 'delete',
-            onTap: () {},
+            onTap: () {
+              final provider =
+                  Provider.of<MedicineProvider>(context, listen: false);
+              provider.deleteModel(model);
+              foo();
+            },
           ),
         ],
         child: Container(
@@ -148,8 +176,10 @@ class MedicineCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Timer(
-                    duration: calculateDuration(),
+                  TimerWidget(
+                    duration: calculateDuration(context),
+                    data: data,
+                    model: model,
                   ),
                   const SizedBox(width: 10.0),
                   Flexible(child: medDescriptionWidget()),

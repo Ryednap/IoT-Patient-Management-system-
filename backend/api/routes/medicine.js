@@ -55,6 +55,7 @@ router.get('/:medicineId', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    console.log(req.body);
     const medicine = {
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
@@ -63,7 +64,7 @@ router.post('/', (req, res) => {
         ringTime: req.body.ringTime
     };
     console.log(`request for POST ${medicine}`);
-    thingspeakPost(`0${medicine.ringTime}`, 1).then(status => {
+    thingspeakPost(`zz${req.body.ringTime}zz`, 1, "Screen").then(status => {
         if (status != 200) {
             res.status(status).json({
                 message: "Some Error occured in POST thingspeak"
@@ -88,9 +89,13 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/ring', (req, res) => {
-    let status = thingspeakPost('1', 1);
-    res.status(status).json({});
+router.post('/ring/:type', (req, res) => {
+    const medType = req.params.type;
+    thingspeakPost(medType, 1, 'Ring').then(status => {
+        res.status(status).json({ message: "Done" });
+    }).catch(err => {
+        res.status(500).json({ message: "Some error occured" });
+    });
 });
 
 router.patch('/:medicineId', (req, res) => {

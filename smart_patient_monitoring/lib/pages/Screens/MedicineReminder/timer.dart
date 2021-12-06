@@ -1,16 +1,38 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_patient_monitoring/pages/Screens/MedicineReminder/model/medicine_provider.dart';
 import 'dart:math' as math;
 
-class Timer extends StatefulWidget {
+import 'package:smart_patient_monitoring/service/med_reminder_api.dart';
+
+List<dynamic> done = [];
+
+class TimerWidget extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final duration;
-  const Timer({Key? key, required this.duration}) : super(key: key);
+  final data;
+  final model;
+  const TimerWidget(
+      {Key? key,
+      required this.duration,
+      required this.data,
+      required this.model})
+      : super(key: key);
 
   @override
   _TimerState createState() => _TimerState();
 }
 
-class _TimerState extends State<Timer> {
+class _TimerState extends State<TimerWidget> {
+  bool valid() {
+    for (int i = 0; i < done.length; ++i) {
+      if (done[i] == widget.model!.id) return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     const size = 80.0;
@@ -19,6 +41,15 @@ class _TimerState extends State<Timer> {
       tween: Tween(begin: 0.0, end: 1.0),
       builder: (context, value, child) {
         final percentage = (value * 100).round();
+        if (percentage == 100 && valid()) {
+          done.add(widget.model!.id);
+          MedicineReminderAPI.createRingPostRequest(widget.data);
+          Timer(const Duration(seconds: 15), () {
+            MedicineReminderAPI.createRingPostRequest("fdfdf");
+            Provider.of<MedicineProvider>(context, listen: false)
+                .deleteModel(widget.model);
+          });
+        }
         return SizedBox(
           width: size,
           height: size,

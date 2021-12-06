@@ -14,6 +14,10 @@ class MedicineReminder extends StatefulWidget {
 }
 
 class _MedicineReminderState extends State<MedicineReminder> {
+  void foo() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     MedicineReminderAPI.getMedicineModel();
@@ -86,7 +90,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
                       List<MedicineModel>? models = snapshot.data;
                       final provider = Provider.of<MedicineProvider>(context);
                       provider.setModels(models!);
-                      return const MedicineCardWrapper();
+                      return MedicineCardWrapper(foo: foo);
                     }
                     AssertionError("Error in stream builder");
                     return const Text("error");

@@ -10,9 +10,17 @@ const urllibRequestAsync = Promise.promisify(urllib.request);
  * with the given 'data'
  */
 
-let thingspeakPost = function (data, field) {
-    const URL = process.env.THINGSPEAK_WRITE_URL;
-    const KEY = process.env.THINGSPEAK_WRITE_KEY;
+let thingspeakPost = function (data, field, signal) {
+    let URL = process.env.THINGSPEAK_WRITE_URL;
+    let KEY = process.env.THINGSPEAK_WRITE_KEY;
+    if (signal == "Screen") {
+        URL = process.env.THINGSPEAK_SCREEN_WRITE_URL;
+        KEY = process.env.THINGSPEAK_SCREEN_WRITE_KEY;
+    }
+    if (signal == "Ring") {
+        URL = process.env.THINGSPEAK_RING_WRITE_URL;
+        KEY = process.env.THINGSPEAK_RING_WRITE_KEY;
+    }
     const HEADER = `&field${field}='${data}'`;
 
     const NEW_URL = URL + KEY + HEADER;
